@@ -12,4 +12,31 @@
 #notes-app .title {
   font-size: 3rem;
 }
+
+#notes-app #notes {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#notes-app #notes .note {
+  width: 30%;
+  min-height: 100px;
+  padding: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 3rem;
+}
+
+#notes-app #notes .note:nth-child(3n) {
+  margin-right: 0;
+}
+
+#notes-app #notes .note h2 {
+  font-size: 24px;
+}
 /*# sourceMappingURL=style.css.map */

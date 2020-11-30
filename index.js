@@ -31,11 +31,19 @@ class NotesList {
 
     createNote(newNote = { title, noteText, color: "#eee", pinned: false, reminderDate, tags: [] }) {
         const createdNote = new Note(newNote);
-        this.notes.push(createdNote);
+        if (newNote.pinned) this.notes.unshift(createdNote);
+        else this.notes.push(createdNote);
         this.drawNotes();
     }
 
-    parseNote(note) {
+    deleteNote(deletedIndex) {
+        console.log(deletedIndex)
+        const newNoteList = this.notes.filter((n, index) => index != deletedIndex);
+        this.notes = newNoteList;
+        this.drawNotes();
+    }
+
+    parseNote(note, index) {
         const noteElement = document.createElement('div');
         noteElement.classList.add('note');
         noteElement.style.backgroundColor = note.color;
@@ -47,17 +55,15 @@ class NotesList {
                 <h2 class="title">${note.title}</h2>
                 <p class="body">${note.noteText}</p>
                 <div class="tags">${parsedTags}</div>
+                <button class="del-btn" onclick="notesList.deleteNote(${index})">x</button>
             `;
         return noteElement;
     }
 
     drawNotes() {
         this.rootElement.innerHTML = '';
-        this.notes.filter(n => n.pinned == true).forEach(note => {
-            this.rootElement.appendChild(this.parseNote(note));
-        });
-        this.notes.filter(n => n.pinned == false).forEach(note => {
-            this.rootElement.appendChild(this.parseNote(note));
+        this.notes.forEach((note, i) => {
+            this.rootElement.appendChild(this.parseNote(note, i));
         });
     }
 }
