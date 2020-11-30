@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#notes-app {
+    padding: 2rem;
+    font-family: "Josefin Sans";
+
+    .title {
+        font-size: 3rem;
+    }
+}
