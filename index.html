@@ -24,7 +24,7 @@
             </div>
             <div>
                 <label for="new-note-color">Color</label>
-                <input id="new-note-color" type="color" />
+                <input id="new-note-color" type="color" value="#ffffff" />
             </div>
             <div>
                 <label for="new-note-pinned">Pinned</label>
@@ -40,6 +40,12 @@
                 <input id="new-note-tags" type="text" />
             </div>
             <button id="create-new-note">+</button>
+        </div>
+        <div class="search-note-form">
+            <div>
+                <label for="note-search">Search</label>
+                <input id="note-search" type="text" placeholder="Note title, text, tags..." />
+            </div>
         </div>
         <div id="notes"></div>
     </main>

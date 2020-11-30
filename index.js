@@ -62,9 +62,15 @@ class NotesList {
         return noteElement;
     }
 
+    filterNotes() {
+        const filterQuery = document.getElementById('note-search').value;
+        const filteredNotes = this.notes.filter(n => n.title.search(filterQuery) > -1 || n.noteText.search(filterQuery) > -1 || n.tags.search(filterQuery) > -1);
+        return filteredNotes;
+    }
+
     drawNotes() {
         this.rootElement.innerHTML = '';
-        this.notes.forEach((note, i) => {
+        this.filterNotes().forEach((note, i) => {
             this.rootElement.appendChild(this.parseNote(note, i));
         });
     }
@@ -88,4 +94,8 @@ document.getElementById('create-new-note').addEventListener('click', () => {
         reminderDate: newNoteReminder,
         tags: newNoteTags
     })
+});
+
+document.getElementById('note-search').addEventListener('keyup', (e) => {
+    notesList.drawNotes();
 });
