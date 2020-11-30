@@ -35,20 +35,29 @@ class NotesList {
         this.drawNotes();
     }
 
-    drawNotes() {
-        this.rootElement.innerHTML = '';
-        this.notes.forEach(note => {
-            const noteElement = document.createElement('div');
-            noteElement.classList.add('note');
-            noteElement.style.backgroundColor = note.color;
+    parseNote(note) {
+        const noteElement = document.createElement('div');
+        noteElement.classList.add('note');
+        noteElement.style.backgroundColor = note.color;
+        const tagsList = note.tags.split(' ');
+        let parsedTags = '';
+        tagsList.forEach(tag => parsedTags += `<span class="tag">${tag}</span>`)
 
-            noteElement.innerHTML = `
+        noteElement.innerHTML = `
                 <h2 class="title">${note.title}</h2>
                 <p class="body">${note.noteText}</p>
-                
+                <div class="tags">${parsedTags}</div>
             `;
+        return noteElement;
+    }
 
-            this.rootElement.appendChild(noteElement);
+    drawNotes() {
+        this.rootElement.innerHTML = '';
+        this.notes.filter(n => n.pinned == true).forEach(note => {
+            this.rootElement.appendChild(this.parseNote(note));
+        });
+        this.notes.filter(n => n.pinned == false).forEach(note => {
+            this.rootElement.appendChild(this.parseNote(note));
         });
     }
 }
