@@ -52,9 +52,11 @@ class NotesList {
         tagsList.forEach(tag => parsedTags += `<span class="tag">${tag}</span>`)
 
         noteElement.innerHTML = `
+                ${note.pinned ? '<span class="pinned">PINNED</span>' : ''}
                 <h2 class="title">${note.title}</h2>
                 <p class="body">${note.noteText}</p>
                 <div class="tags">${parsedTags}</div>
+                <p class="created">${new Date(note.creationDate).toLocaleDateString()}</div>
                 <button class="del-btn" onclick="notesList.deleteNote(${index})">x</button>
             `;
         return noteElement;
