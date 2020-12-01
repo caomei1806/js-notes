@@ -7,24 +7,31 @@
     <title>NotesApp</title>
 
     <link rel="stylesheet" href="./style.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <script src="./index.js" defer></script>
 </head>
 
 <body>
-    <main id="notes-app">
+    <nav>
         <h1 class="title">NotesAPP</h1>
+    </nav>
+    <main id="notes-app">
         <div id="create-note-form">
             <div>
                 <label for="new-note-title">Title</label>
-                <input id="new-note-title" type="text" />
+                <br />
+                <input id="new-note-title" type="text" placeholder="Tap title..." />
+                <small class="error-message">Enter title</small>
             </div>
             <div>
                 <label for="new-note-body">Note body</label>
-                <input id="new-note-body" type="text" />
+                <br />
+                <input id="new-note-body" type="text" placeholder="Tap text..." />
             </div>
             <div>
                 <label for="new-note-color">Color</label>
-                <input id="new-note-color" type="color" value="#ffffff" />
+                <br />
+                <input id="new-note-color" type="color" value="#ffd369" />
             </div>
             <div>
                 <label for="new-note-pinned">Pinned</label>
@@ -32,22 +39,28 @@
             </div>
             <div>
                 <label for="new-note-reminder">Reminder date</label>
+                <br />
                 <!-- NOT FOR FIREFOX -->
                 <input id="new-note-reminder" type="datetime-local" />
             </div>
             <div>
                 <label for="new-note-tags">Tags</label>
-                <input id="new-note-tags" type="text" />
+                <br />
+                <input id="new-note-tags" type="text" placeholder="Separate tags with space ' '" />
             </div>
-            <button id="create-new-note">+</button>
+            <button id="create-new-note"><i class='bx bx-plus'></i></button>
         </div>
-        <div class="search-note-form">
-            <div>
-                <label for="note-search">Search</label>
-                <input id="note-search" type="text" placeholder="Note title, text, tags..." />
+        <div id="main-content">
+            <div class="search-note-form">
+                <div>
+                    <label for="note-search"><i class='bx bx-search'></i></label>
+                    <input id="note-search" type="text" placeholder="Search by title, body, tags..." />
+
+                </div>
             </div>
+            <div id="notes"></div>
         </div>
-        <div id="notes"></div>
+
     </main>
 </body>
 

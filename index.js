@@ -47,18 +47,25 @@ class NotesList {
         const noteElement = document.createElement('div');
         noteElement.classList.add('note');
         noteElement.style.backgroundColor = note.color;
+        const noteBodyElement = document.createElement('div');
+        noteBodyElement.classList.add('note-body-element');
+        noteElement.appendChild(noteBodyElement);
         const tagsList = note.tags.split(' ');
         let parsedTags = '';
-        tagsList.forEach(tag => parsedTags += `<span class="tag">${tag}</span>`)
+        tagsList.forEach(tag => parsedTags += tag ? '<span class="tag">' + tag + '</span>' : '');
+        console.log(parsedTags)
 
-        noteElement.innerHTML = `
-                ${note.pinned ? '<span class="pinned">PINNED</span>' : ''}
+        noteBodyElement.innerHTML = `
+                <div class="reminder">
+                    ${note.reminderDate ? '<span class="created">' + new Date(note.reminderDate).toLocaleDateString() + '</span>' : ''}
+                    ${note.pinned ? '<span class="pinned"><i class="bx bxs-pin"></i></span>' : ''
+            }
+                </div>
                 <h2 class="title">${note.title}</h2>
                 <p class="body">${note.noteText}</p>
                 <div class="tags">${parsedTags}</div>
-                <p class="created">${new Date(note.creationDate).toLocaleDateString()}</div>
-                <button class="del-btn" onclick="notesList.deleteNote(${index})">x</button>
-            `;
+                <button class="del-btn" onclick="notesList.deleteNote(${index})" style="background-color:${note.color}"><i class="bx bx-x"></i></button>
+        `;
         return noteElement;
     }
 
@@ -85,15 +92,21 @@ document.getElementById('create-new-note').addEventListener('click', () => {
     const newNotePinned = document.getElementById('new-note-pinned').checked;
     const newNoteReminder = document.getElementById('new-note-reminder').value;
     const newNoteTags = document.getElementById('new-note-tags').value;
-
-    notesList.createNote({
-        title: newNoteTitle,
-        noteText: newNoteBody,
-        color: newNoteColor,
-        pinned: newNotePinned,
-        reminderDate: newNoteReminder,
-        tags: newNoteTags
-    })
+    if (newNoteTitle != '') {
+        document.getElementById('new-note-title').classList.remove("error");
+        document.querySelector(".error-message").classList.remove("error-displayed");
+        notesList.createNote({
+            title: newNoteTitle,
+            noteText: newNoteBody,
+            color: newNoteColor,
+            pinned: newNotePinned,
+            reminderDate: newNoteReminder,
+            tags: newNoteTags
+        })
+    } else {
+        document.getElementById('new-note-title').classList.add("error");
+        document.querySelector(".error-message").classList.add("error-displayed");
+    }
 });
 
 document.getElementById('note-search').addEventListener('keyup', (e) => {

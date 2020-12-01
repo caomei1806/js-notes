@@ -1,42 +1,165 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap');
+
+
+$primary: #ffd369;
+$dark: #222831;
+$medium-dark: darken(rgb(182, 182, 182), 50%);
 
 * {
     padding: 0;
     margin: 0;
 }
-
-.search-note-form {
-    margin-top: 2rem;
+nav{
+    
+    background-color:   $dark;
+    width: calc(100% - 4rem);
+    font-family: "Montserrat";
+    padding: 1rem 2rem;
+    .title {
+        font-size: 32px;
+        color:  #eeeeee;
+    }
 }
+
 
 #notes-app {
     padding: 2rem;
-    font-family: "Josefin Sans";
-
-    .title {
-        font-size: 3rem;
+    font-family: "Work Sans";
+    display: flex;
+    min-height: calc(100vh - 143px);
+    color: $dark;
+    input{
+        outline: unset;
+        border: unset;
+        border-bottom: 2px rgb(182, 182, 182) solid;
+        margin-top: 0.5rem;
+        margin-bottom: 2rem;
+        transition: 0.6s all ease-out;
+        font-family: "Work Sans";
+        &:hover{
+            cursor: pointer;
+            border-bottom-color: $medium-dark;
+        }
+        &:focus{
+        border-bottom: 2px  $primary solid;
+        }
+        &[type="text"]{
+        width: 60%;
+        padding: 5px 10px;
+        }
+        &[type="datetime-local"]{
+        padding: 3px 10px;
+        width: calc(60% - 1px);
+        }
+        &.error{
+            border-bottom-color: rgb(255, 81, 0);
+        }
     }
+    button{
+        font-size: 20px;
+        padding: 8px 10px;
+        outline: unset;
+        border: unset;
+        background-color: $primary;
+        transition: 0.6s all ease-out;
+        &:hover{
+            cursor: pointer;
+            background-color: darken($primary, 20%)
+        }
+    }
+    
 
-    #notes{
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        flex-wrap: wrap;
+    #create-note-form{
+        width: 30%;
+        small{
+            display: none;
+            margin-bottom: calc(2rem - 15px);
+            color: rgb(255, 81, 0);
+            &.error-displayed{
+                display: block;
+                margin-top: -2rem;
+            }
+        }
+    }
+    #main-content{
+        width: 70%;
+        .search-note-form {
+            width: 70%;
+            div{
+                position: relative;
+                label{
+                    position: absolute;
+                    right: 0;
+                    top: 25%;
+                }
+                #note-search{
+                font-family: "Work Sans";
+                width: 100%;
+                padding: 10px 10px;
+                border-bottom: 2px rgb(182, 182, 182) solid;
+                    &:hover, &:focus{
+                        cursor: pointer;
+                        border-bottom-color: $medium-dark;
+                    }
+                }
+            }
+        }
+        #notes{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
         
-        .note{
-            width: 30%;
-            min-height: 100px;
-            padding: 1rem;
-            margin-right: 1rem;
-            margin-bottom: 3rem;
-            &:nth-child(3n){
-                margin-right: 0;
-            }
-            h2{
-                font-size: 24px;
-            }
+            .note{
+                width: 30%;
+                min-height: 100px;
+                padding: 1.5rem;
+                margin-right: 1rem;
+                margin-bottom: 3rem;
+                &:nth-child(2n){
+                    margin-right: 0;
+                }
+                .note-body-element{
+                    background-color: white;
+                    height: calc(100% - 2rem);
+                    padding: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    .reminder{
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin-bottom: 1rem;
+                    }
+                    .tags{
+                        display: flex;
+                        flex-wrap: wrap;
+                        .tag{
+                            padding: 0.3rem 1rem;
+                            background-color: rgb(182, 182, 182);
+                            color: white;
+                            border-radius: 10px;
+                            margin-right: 5px;
+                            margin-bottom: 0.2rem;
+                        }
+                    }
+                    h2{
+                    font-size: 24px;
+                    margin-bottom: 0.5rem;
+                    }
+                    .body{
+                        margin-bottom: 1rem;
+                     
+                    }
+                    .del-btn{
+                        margin-top: 2rem;
+                        align-self: center;
 
+                    }
+                }
+            }
         }
     }
 }
